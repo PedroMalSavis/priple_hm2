@@ -2,6 +2,8 @@ const http = require('http')
 const https = require('https')
 const url = require('url')
 const StringDecoder = require('string_decoder').StringDecoder
+//lets divide the house: [dev mode : staging, production : production]
+const config = require('./config.js')
 
 
 const server = http.createServer((req,res) => {
@@ -45,8 +47,8 @@ const server = http.createServer((req,res) => {
     })
   })
 })
-server.listen(3000, () => {
-  console.log('this protocol is listening to port 3000')
+server.listen(config.port, () => {
+  console.log(`the protocol use was: ${config.envName}, and it is using the port ${config.port}`)
 })
 
 
