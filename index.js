@@ -2,11 +2,34 @@ const http = require('http')
 const https = require('https')
 const url = require('url')
 const StringDecoder = require('string_decoder').StringDecoder
+const fs = require('fs')
 //lets divide the house: [dev mode : staging, production : production]
 const config = require('./config.js')
 
+//call the heavens in https and http
 
-const server = http.createServer((req,res) => {
+//http
+const httpServer = http.createServer((req, res) => {
+  unisonserver(req,res)
+})
+httpServer.listen(config.httpPort, () => {
+  console.log(`the HTTP server is running and up at the port: ${config.httpPort}`)
+})
+
+//https
+const httpsOptions = {
+  'key' : fs.readFileSync('./https/key.pem'),
+  'cert' : fs.readFileSync('./https/cert.pem')
+}
+const httpsServer = https.createServer(httpsOptions, (req, res) => {
+  unisonserver(req, res)
+})
+httpsServer.listen(config.httpsPort, () => {
+  console.log(`the HTTPS server is running and up at the port: ${config.httpsPort}`)
+})
+
+//the heavens
+const unisonserver = (req,res) => {
   //instance for data, headers, and method handling
   const parseURL = url.parse(req.url, true)
   const path = parseURL.pathname
@@ -46,10 +69,7 @@ const server = http.createServer((req,res) => {
       console.log('return this response', statusCode, payloadString)
     })
   })
-})
-server.listen(config.port, () => {
-  console.log(`the protocol use was: ${config.envName}, and it is using the port ${config.port}`)
-})
+}
 
 
 

@@ -4,13 +4,15 @@ const environments = {}
 
 //object for dev mode
 environments.staging = {
-  'port': 3000,
+  'httpPort': 3000,
+  'httpsPort': 3001,
   'envName': 'staging'
 }
 
 //object for production mode
 environments.production = {
-  'port':3001,
+  'httpPort': 6000,
+  'httpsPort': 6001,
   'envName': 'production'
 }
 
