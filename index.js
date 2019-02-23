@@ -4,7 +4,7 @@ const url = require('url')
 const StringDecoder = require('string_decoder').StringDecoder
 const fs = require('fs')
 //lets divide the house: [dev mode : staging, production : production]
-const config = require('./config.js')
+const config = require('./lib/config.js')
 
 //call the heavens in https and http
 
