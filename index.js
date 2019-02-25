@@ -3,6 +3,7 @@ const https = require('https')
 const url = require('url')
 const StringDecoder = require('string_decoder').StringDecoder
 const fs = require('fs')
+handlers = require('./lib/handlers/main')
 //lets divide the house: [dev mode : staging, production : production]
 const config = require('./lib/config.js')
 
@@ -74,13 +75,7 @@ const unisonserver = (req,res) => {
 
 
 //instance for hadling the routers
-let handlers = {}
-handlers.sample = (data, callback) => {
-  callback(301, {'name': 'sample handler'})
-}
-handlers.pageNotFound = (data, callback) => {
-  callback(404)
-}
+
 //instance for router object
 const router = {
   'sample': handlers.sample
