@@ -3,7 +3,7 @@ const https = require('https')
 const url = require('url')
 const StringDecoder = require('string_decoder').StringDecoder
 const fs = require('fs')
-handlers = require('./lib/handlers/main')
+const handlers = require('./lib/handlers/main')
 //lets divide the house: [dev mode : staging, production : production]
 const config = require('./lib/config.js')
 
