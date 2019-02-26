@@ -51,7 +51,6 @@ const unisonserver = (req,res) => {
   //request for end
   req.on('end', () => {
     buffer += decoder.end()
-    const chosenHandler = typeof(router[trimpath]) !== 'undefined' ? router[trimpath] : handlers.pageNotFound
     const data = {
       trimpath,
       method,
@@ -59,6 +58,8 @@ const unisonserver = (req,res) => {
       headers,
       'payload': buffer
     }
+    const chosenHandler = typeof(router[trimpath]) !== 'undefined' ? router[trimpath] : handlers.pageNotFound
+
 
     chosenHandler(data, (statusCode, payload) => {
       statusCode = typeof(statusCode) == 'number' ? statusCode : 200
