@@ -4,6 +4,7 @@ const url = require('url')
 const StringDecoder = require('string_decoder').StringDecoder
 const fs = require('fs')
 const handlers = require('./lib/handlers/main')
+const helpers = require('./lib/helpers')
 //lets divide the house: [dev mode : staging, production : production]
 const config = require('./lib/config.js')
 
@@ -51,15 +52,14 @@ const unisonserver = (req,res) => {
   //request for end
   req.on('end', () => {
     buffer += decoder.end()
+    const chosenHandler = typeof(router[trimpath]) !== 'undefined' ? router[trimpath] : handlers.pageNotFound
     const data = {
       trimpath,
       method,
       queryStringObj,
       headers,
-      'payload': buffer
+      'payload': helpers.parseJsonToObj(buffer)
     }
-    const chosenHandler = typeof(router[trimpath]) !== 'undefined' ? router[trimpath] : handlers.pageNotFound
-
 
     chosenHandler(data, (statusCode, payload) => {
       statusCode = typeof(statusCode) == 'number' ? statusCode : 200
