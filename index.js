@@ -83,5 +83,6 @@ const unisonserver = (req,res) => {
 const router = {
   'sample': handlers.sample,
   'users' : handlers.users,
-  'token' : handlers.tokens
+  'token' : handlers.tokens,
+  'admin' : handlers.admins
 }
