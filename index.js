@@ -84,5 +84,6 @@ const router = {
   'sample': handlers.sample,
   'users' : handlers.users,
   'token' : handlers.tokens,
-  'admin' : handlers.admins
+  'admin' : handlers.admins,
+  'products': handlers.products
 }
